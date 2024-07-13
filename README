@@ -1,0 +1,69 @@
+*******************************************************************************
+CS131: Artificial Intelligence
+A3: Genetic Algorithms
+*******************************************************************************
+Submission by Madelyn Silveira
+03/7/2023
+
+----------------------------------------------------------------
+Included in this assignment:
+main.py     -- instantiation of population and implementation of evolution
+genetics.py -- implementation of all functions
+globals.py  -- holds an array of boxes to be added or excluded from the backpack
+README      -- this file. Describes implementation and the problem being solved
+
+----------------------------------------------------------------
+THE KNAPSACK PROBLEM 
+You are given a backpack with a maximum weight (250) and a set of boxes with 
+different weights and importance values. The goal is to fill the backpack to 
+make it as valuable as possible without exceeding the maximum weight.
+
+----------------------------------------------------------------
+Defining the problem as a genetic algorithm:
+
+The problem starts with the initialization of a population of a specified size,
+set by default to 10000. The genomes for each member are determined randomly
+for generation 0. The fitness function is applied during initialization to 
+create an array of tuples including each member's importance and genome.
+
+The importance of each member is calculated using the fitness function. It 
+adds up the value of each box to determine an overall importance level. This
+level is set to 0 if the combined weight of the boxes exceeds the max weight 
+(250).
+
+The population is culled by 50% upon each generation. This process takes a 
+generation sorted in decreasing order by fitness and eliminates the second 
+half of the population. These remaining members are selected for reproduction.
+The reproduction process mutates up to 10% of the second half of the fittest
+individuals and recombine up to 10% of all individuals. 
+
+Via the helper methods mutate() and crossover(), define in genetics.py,
+the new population continues with the previous members as well as their 
+mutated children. 
+
+Before the size of the population reaches 2 (by means of culling 50% each 
+time), the program terminates by ordering the remaining 3 or 4 members and 
+selecting the fittest one as the final solution. Since this runs satisfactorily,
+there is no specific solution check implemented.
+
+----------------------------------------------------------------
+Providing the genome for the problem:
+
+The genome can be represented as a binary string of whether or not each box is 
+included in the genome. 1 if the box is included, 0 if not.
+110011110100 and 111001010110 are two examples of optimal genomes, obtained 
+through my algorithm.
+
+----------------------------------------------------------------
+Defining all the fringe operations:
+- mutation --> swap random bit from 0 to 1 or vice versa, one genome could in
+               theory be selected mutiple times to offer multiple mutations
+- crossover (recombination) --> combine 2 genome at random point in arrays
+- selection --> anyone who survived the culling can be recombined, 
+                anyone who falls in the latter half of the fittest individuals 
+                may be mutated
+
+
+
+
+
